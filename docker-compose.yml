@@ -1,0 +1,31 @@
+﻿services:
+  webapi:
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+    ports:
+      - "7000:80"
+    depends_on:
+      - sqlserver
+    environment:
+      - ConnectionStrings__Default=Server=sqlserver;Database=ProductDb;User=sa;Password=YourStrong!Passw0rd
+    networks:
+      - backend
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-lts
+    environment:
+      - SA_PASSWORD=YourStrong!Passw0rd
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    networks:
+      - backend
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:
+
+networks:
+  backend:
