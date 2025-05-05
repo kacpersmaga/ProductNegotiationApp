@@ -8,12 +8,14 @@
     depends_on:
       - sqlserver
     environment:
-      - ConnectionStrings__Default=Server=sqlserver;Database=ProductDb;User=sa;Password=YourStrong!Passw0rd
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__Default=Server=sqlserver;Database=ProductDb;User=sa;Password=YourStrong!Passw0rd;Encrypt=True;TrustServerCertificate=True
     networks:
       - backend
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-lts
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       - SA_PASSWORD=YourStrong!Passw0rd
       - ACCEPT_EULA=Y
