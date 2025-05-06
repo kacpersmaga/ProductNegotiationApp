@@ -3,6 +3,7 @@ using Negotiations;
 using Serilog;
 using Products;
 using Products.Infrastructure.Persistence;
+using Shared;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSharedModule(builder.Configuration);
 builder.Services.AddProductsModule(builder.Configuration);
 builder.Services.AddNegotiationsModule(builder.Configuration);
 

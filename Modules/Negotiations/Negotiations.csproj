@@ -11,13 +11,16 @@
       <Folder Include="Application\Commands\" />
       <Folder Include="Application\DTOs\" />
       <Folder Include="Application\Queries\" />
-      <Folder Include="Application\Services\" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>
