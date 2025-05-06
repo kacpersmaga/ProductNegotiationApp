@@ -11,6 +11,10 @@
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__Default=Server=sqlserver;Database=ProductDb;User=sa;Password=YourStrong!Passw0rd;Encrypt=True;TrustServerCertificate=True
+      - JwtSettings__Secret=YourVeryLongAndSecureSecretKeyHere1234567890
+      - JwtSettings__Issuer=PriceNegotiator
+      - JwtSettings__Audience=PriceNegotiatorClients
+      - JwtSettings__ExpiryMinutes=60
     networks:
       - backend
 

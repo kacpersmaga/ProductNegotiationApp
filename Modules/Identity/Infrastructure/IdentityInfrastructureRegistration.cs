@@ -20,7 +20,7 @@ public static class IdentityInfrastructureRegistration
     {
         services.AddDbContext<IdentityDbContext>(options =>
             options.UseSqlServer(
-                config.GetConnectionString("DefaultConnection")));
+                config.GetConnectionString("Default")));
         
         services.Configure<JwtSettings>(
             config.GetSection("JwtSettings"));

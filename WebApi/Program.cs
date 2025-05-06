@@ -41,11 +41,15 @@ using (var scope = app.Services.CreateScope())
 
     var negotiationDb = serviceProvider.GetRequiredService<NegotiationDbContext>();
     negotiationDb.Database.Migrate();
+    
+    var identityDb = serviceProvider.GetRequiredService<Identity.Infrastructure.Persistence.IdentityDbContext>();
+    identityDb.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
