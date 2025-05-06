@@ -1,3 +1,4 @@
+using Identity;
 using Microsoft.EntityFrameworkCore;
 using Negotiations;
 using Negotiations.Infrastructure.Persistence;
@@ -21,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSharedModule(builder.Configuration);
 builder.Services.AddProductsModule(builder.Configuration);
 builder.Services.AddNegotiationsModule(builder.Configuration);
+builder.Services.AddIdentityModule(builder.Configuration);
 
 var app = builder.Build();
 
