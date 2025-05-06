@@ -29,7 +29,8 @@ public class NegotiationRepository : INegotiationRepository
 
     public async Task UpdateAsync(Negotiation negotiation, CancellationToken cancellationToken)
     {
-        _dbContext.Negotiations.Update(negotiation);
+        _dbContext.AddRange(negotiation.Proposals.Where(p => _dbContext.Entry(p).State == EntityState.Detached));
+        
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

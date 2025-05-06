@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Negotiations;
+using Negotiations.Infrastructure.Persistence;
 using Serilog;
 using Products;
 using Products.Infrastructure.Persistence;
@@ -30,8 +31,13 @@ if (app.Environment.IsDevelopment())
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
-    db.Database.Migrate();
+    var serviceProvider = scope.ServiceProvider;
+
+    var productDb = serviceProvider.GetRequiredService<ProductDbContext>();
+    productDb.Database.Migrate();
+
+    var negotiationDb = serviceProvider.GetRequiredService<NegotiationDbContext>();
+    negotiationDb.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
