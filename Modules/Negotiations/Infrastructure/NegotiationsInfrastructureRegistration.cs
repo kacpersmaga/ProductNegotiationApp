@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Negotiations.Domain.Interfaces;
 using Negotiations.Infrastructure.Persistence;
 using Negotiations.Infrastructure.Repositories;
 
@@ -13,6 +14,8 @@ public static class NegotiationsInfrastructureRegistration
         services.AddDbContext<NegotiationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Default")));
 
+        services.AddScoped<INegotiationRepository, NegotiationRepository>();
+        
         return services;
     }
 }

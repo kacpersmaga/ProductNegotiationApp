@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Negotiations;
 using Serilog;
 using Products;
 using Products.Infrastructure.Persistence;
@@ -15,6 +16,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddProductsModule(builder.Configuration);
+builder.Services.AddNegotiationsModule(builder.Configuration);
 
 var app = builder.Build();
 
