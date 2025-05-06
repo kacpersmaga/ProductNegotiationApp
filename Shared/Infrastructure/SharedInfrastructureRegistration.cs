@@ -12,5 +12,6 @@ namespace Shared.Infrastructure
 
             return services;
         }
+        
     }
 }

@@ -28,18 +28,10 @@ public class ProductsController : ControllerBase
         CancellationToken cancellationToken)
     {
         _logger.LogInformation("Received request to create product");
-
-        try
-        {
-            var command = new CreateProductCommand(dto.Name, dto.Price, dto.Description);
-            var id = await _mediator.Send(command, cancellationToken);
-            return Ok(ApiResponse<Guid>.Ok(id));
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error while creating product");
-            return BadRequest(ApiResponse<Guid>.Fail("Failed to create product"));
-        }
+        
+        var command = new CreateProductCommand(dto.Name, dto.Price, dto.Description);
+        var id = await _mediator.Send(command, cancellationToken);
+        return Ok(ApiResponse<Guid>.Ok(id));
     }
 
     [HttpGet("{id:guid}")]
