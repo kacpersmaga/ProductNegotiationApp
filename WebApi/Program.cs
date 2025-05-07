@@ -7,6 +7,7 @@ using Products;
 using Products.Infrastructure.Persistence;
 using Shared;
 using Shared.Infrastructure.Middleware;
+using WebApi.Configuration;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -18,7 +19,7 @@ builder.Host.UseSerilog();
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerWithJwt();
 builder.Services.AddSharedModule(builder.Configuration);
 builder.Services.AddProductsModule(builder.Configuration);
 builder.Services.AddNegotiationsModule(builder.Configuration);
