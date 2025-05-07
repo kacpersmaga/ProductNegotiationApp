@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Negotiations.Application.Commands.AcceptNegotiation;
@@ -69,6 +70,7 @@ public class NegotiationsController : ControllerBase
     }
 
     [HttpPost("{id:guid}/accept")]
+    [Authorize]
     public async Task<ActionResult<ApiResponse<string>>> Accept(
         Guid id,
         CancellationToken cancellationToken)
@@ -82,6 +84,7 @@ public class NegotiationsController : ControllerBase
     }
 
     [HttpPost("{id:guid}/reject")]
+    [Authorize]
     public async Task<ActionResult<ApiResponse<string>>> Reject(
         Guid id,
         CancellationToken cancellationToken)

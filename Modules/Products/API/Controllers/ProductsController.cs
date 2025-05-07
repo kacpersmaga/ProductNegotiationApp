@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Products.Application.Commands.CreateProduct;
@@ -23,6 +24,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<ApiResponse<Guid>>> Create(
         [FromBody] CreateProductDto dto,
         CancellationToken cancellationToken)
