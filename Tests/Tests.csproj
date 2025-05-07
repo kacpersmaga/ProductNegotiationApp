@@ -26,9 +26,6 @@
       <Folder Include="IdentityTests\IntegrationTests\API\" />
       <Folder Include="NegotiationTests\IntegrationTests\API\" />
       <Folder Include="ProductTests\IntegrationTests\API\" />
-      <Folder Include="ProductTests\UnitTests\Application\Commands\" />
-      <Folder Include="ProductTests\UnitTests\Application\Queries\" />
-      <Folder Include="ProductTests\UnitTests\Domain\" />
     </ItemGroup>
 
     <ItemGroup>
