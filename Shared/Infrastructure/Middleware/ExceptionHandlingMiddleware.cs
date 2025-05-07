@@ -38,6 +38,11 @@ namespace Shared.Infrastructure.Middleware;
             
             switch (exception)
             {
+                case ApplicationException appEx:
+                    statusCode = StatusCodes.Status400BadRequest;
+                    message = appEx.Message;
+                    break;
+                
                 case InvalidOperationException opEx when opEx.Message.Contains("not found", StringComparison.OrdinalIgnoreCase):
                     statusCode = StatusCodes.Status404NotFound;
                     message = opEx.Message;
