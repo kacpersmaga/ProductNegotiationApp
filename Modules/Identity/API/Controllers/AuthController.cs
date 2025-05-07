@@ -41,6 +41,8 @@ public class AuthController : ControllerBase
         var token = await _auth.LoginAsync(dto);
         
         _logger.LogInformation("User logged in successfully: {Email}", dto.Email);
-        return Ok(ApiResponse<object>.Ok(new { Token = token }));
+        
+        var tokenDto = new TokenResponse { Token = token };
+        return Ok(ApiResponse<TokenResponse>.Ok(tokenDto));
     }
 }
