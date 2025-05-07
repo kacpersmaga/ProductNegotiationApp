@@ -32,6 +32,8 @@ public class NegotiationsController : ControllerBase
         _logger.LogInformation("Received request to start negotiation");
         var command = new StartNegotiationCommand(dto.CustomerId, dto.ProductId);
         var result = await _mediator.Send(command, cancellationToken);
+        
+        _logger.LogInformation("Negotiation started successfully with ID: {Id}", result.Id);
         return Ok(ApiResponse<NegotiationDto>.Ok(result));
     }
 
@@ -43,7 +45,12 @@ public class NegotiationsController : ControllerBase
         _logger.LogInformation("Received request for negotiation {Id}", id);
         var result = await _mediator.Send(new GetNegotiationQuery(id), cancellationToken);
         if (result == null)
+        {
+            _logger.LogWarning("Negotiation not found with ID {Id}", id);
             return NotFound(ApiResponse<NegotiationDto>.Fail("Negotiation not found"));
+        }
+        
+        _logger.LogInformation("Successfully retrieved negotiation {Id}", id);
         return Ok(ApiResponse<NegotiationDto>.Ok(result));
     }
 
@@ -56,6 +63,8 @@ public class NegotiationsController : ControllerBase
         _logger.LogInformation("Received propose for negotiation {Id}", id);
         var command = new ProposePriceCommand(id, dto.NewPrice);
         await _mediator.Send(command, cancellationToken);
+        
+        _logger.LogInformation("Price proposal submitted successfully for negotiation {Id}", id);
         return Ok(ApiResponse<string>.Ok("Proposal submitted"));
     }
 
@@ -67,6 +76,8 @@ public class NegotiationsController : ControllerBase
         _logger.LogInformation("Received accept for negotiation {Id}", id);
         var command = new AcceptNegotiationCommand(id);
         await _mediator.Send(command, cancellationToken);
+        
+        _logger.LogInformation("Successfully accepted negotiation {Id}", id);
         return Ok(ApiResponse<string>.Ok("Negotiation accepted"));
     }
 
@@ -78,6 +89,8 @@ public class NegotiationsController : ControllerBase
         _logger.LogInformation("Received reject for negotiation {Id}", id);
         var command = new RejectNegotiationCommand(id);
         await _mediator.Send(command, cancellationToken);
+        
+        _logger.LogInformation("Successfully rejected negotiation {Id}", id);
         return Ok(ApiResponse<string>.Ok("Negotiation rejected"));
     }
 }

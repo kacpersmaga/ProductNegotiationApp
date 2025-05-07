@@ -31,6 +31,8 @@ public class ProductsController : ControllerBase
         
         var command = new CreateProductCommand(dto.Name, dto.Price, dto.Description);
         var id = await _mediator.Send(command, cancellationToken);
+        
+        _logger.LogInformation("Product created successfully with ID: {Id}", id);
         return Ok(ApiResponse<Guid>.Ok(id));
     }
 
@@ -49,6 +51,7 @@ public class ProductsController : ControllerBase
             return NotFound(ApiResponse<ProductDto>.Fail("Product not found"));
         }
 
+        _logger.LogInformation("Product retrieved successfully: {Id}", id);
         return Ok(ApiResponse<ProductDto>.Ok(product));
     }
 
@@ -58,6 +61,8 @@ public class ProductsController : ControllerBase
         _logger.LogInformation("Received request to fetch all products");
 
         var products = await _mediator.Send(new GetAllProductsQuery(), cancellationToken);
+        
+        _logger.LogInformation("Successfully retrieved {Count} products", products.Count);
         return Ok(ApiResponse<List<ProductDto>>.Ok(products));
     }
 }
